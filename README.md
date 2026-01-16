@@ -10,12 +10,14 @@ A production-ready data engineering solution demonstrating **Medallion Architect
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
-![Architecture Diagram](docs/images/architecture_diagram.png)
+![Architecture Diagram](docs\images\messageImage_1768485288622.jpg)
 *High-level overview of the data flow and orchestration logic*
 
 ### The Medallion Approach
+
+![Medallion Architecture](docs/images/messageImage_1768487761339.jpg)
 *Refining raw data into business-ready analytics tables*
 
 | Stage | Technology | Description |
@@ -43,7 +45,7 @@ I implemented a robust transformation layer using PySpark to handle ingestion. B
 
 ### 2. Analytics Modeling (dbt)
 
-![dbt Lineage Graph](docs/images/dbt_lineage.png)
+![dbt Lineage Graph](docs\images\Screenshot 2026-01-16 181301.png)
 *Automated lineage showing dependencies from source to marts*
 
 #### Solving "The Olist Trap"
@@ -59,6 +61,9 @@ GROUP BY customer_unique_id  --
 ```
 
 #### Advanced Optimization in Gold Layer
+
+![Gold Layer Detail](docs/images/Screenshot%202026-01-16%20181328.png)
+*Evidence of Technical Optimization: Incremental Load, Clustering, and Partitioning*
 
 | Model | Rows | Optimization |
 |-------|------|--------------|
@@ -86,7 +91,7 @@ I developed a custom `JobLogger` class to ensure every run is audited. The metad
 
 ### 4. Orchestration (Airflow)
 
-![Airflow DAG](docs/images/airflow_dag.png)
+![Airflow DAG](docs\images\Screenshot 2026-01-16 180253.png)
 *A successful end-to-end pipeline run on Airflow*
 
 The entire workflow is managed by Apache Airflow, featuring:
@@ -97,7 +102,7 @@ The entire workflow is managed by Apache Airflow, featuring:
 
 ---
 
-## 🚀 Challenges & Solutions
+## Challenges & Solutions
 
 ### Challenge 1: Schema Stability & Data Integrity
 
@@ -181,7 +186,7 @@ make dbt-docs   # Generate documentation
 
 ## Author
 
-**Anupat** - 3rd-year Data Science Student & Aspiring Data Engineer
+**Anupat Suttilert** - 3rd-year Data Science Student & Aspiring Data Engineer
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/anupat-suttilert-888a73348)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?logo=github)](https://github.com/anupat2046)
