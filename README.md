@@ -12,7 +12,7 @@ A production-ready data engineering solution demonstrating **Medallion Architect
 
 ## Architecture Overview
 
-![Architecture Diagram](docs\images\messageImage_1768485288622.jpg)
+![Architecture Diagram](docs/images/messageImage_1768485288622.jpg)
 *High-level overview of the data flow and orchestration logic*
 
 ### The Medallion Approach
@@ -45,7 +45,7 @@ I implemented a robust transformation layer using PySpark to handle ingestion. B
 
 ### 2. Analytics Modeling (dbt)
 
-![dbt Lineage Graph](docs\images\Screenshot 2026-01-16 181301.png)
+![dbt Lineage Graph](docs/images/Screenshot%202026-01-16%20181301.png)
 *Automated lineage showing dependencies from source to marts*
 
 #### Solving "The Olist Trap"
@@ -91,7 +91,7 @@ I developed a custom `JobLogger` class to ensure every run is audited. The metad
 
 ### 4. Orchestration (Airflow)
 
-![Airflow DAG](docs\images\Screenshot 2026-01-16 180253.png)
+![Airflow DAG](docs/images/Screenshot%202026-01-16%20180253.png)
 *A successful end-to-end pipeline run on Airflow*
 
 The entire workflow is managed by Apache Airflow, featuring:
