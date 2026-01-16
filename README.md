@@ -186,7 +186,7 @@ make dbt-docs   # Generate documentation
 
 ## Author
 
-**Anupat Suttilert** - 3rd-year Data Science Student & Aspiring Data Engineer
+**Anupat Suttilert** - 3rd-year Data Science Student at Thammasat University & Aspiring Data Engineer
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/anupat-suttilert-888a73348)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?logo=github)](https://github.com/anupat2046)
@@ -196,6 +196,6 @@ make dbt-docs   # Generate documentation
 
 ---
 
-## 📝 License
+## License
 
 This project is for educational and portfolio purposes. Dataset sourced from [Kaggle - Brazilian E-Commerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce).
