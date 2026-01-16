@@ -184,6 +184,23 @@ make dbt-docs   # Generate documentation
 
 ---
 
+## Next Steps: From Data Engineering to Business Insights
+
+This pipeline is engineered for immediate scalability. The logical progression is to transform the refined Gold Layer data into **Actionable Insights** through advanced visualization.
+
+### Connecting to Looker Studio
+
+With the modeled data residing in BigQuery (Gold Marts), it is primed for native integration with Looker Studio:
+
+- **LTV Dashboard**: Leverage the `dim_customers_metrics` table to perform customer segmentation and identify high-value individuals based on their Lifetime Value
+- **Sales Performance**: Monitor monthly Net Revenue trends. By utilizing the table's Partitioning, dashboard performance remains high while BigQuery scan costs remain low
+
+### Value Proposition
+
+This project is more than a data transfer exercise; it provides a robust foundation for downstream **Data Science and Analytics teams**, allowing them to focus on insights rather than redundant data cleaning.
+
+---
+
 ## Author
 
 **Anupat Suttilert** - 3rd-year Data Science Student at Thammasat University & Aspiring Data Engineer
