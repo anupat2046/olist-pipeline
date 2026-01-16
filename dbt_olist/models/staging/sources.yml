@@ -1,0 +1,53 @@
+version: 2
+
+sources:
+  - name: olist_warehouse
+    description: "Olist Silver Layer - cleaned and partitioned data"
+    database: olist-de  # Update if different
+    schema: olist_warehouse
+    tables:
+      - name: orders
+        description: "Customer orders with status and timestamps"
+        columns:
+          - name: order_id
+            description: "Unique identifier for each order"
+          - name: customer_id
+            description: "Customer ID for this specific order (changes per order)"
+          - name: order_status
+            description: "Order status: delivered, shipped, canceled, etc."
+          - name: order_purchase_timestamp
+            description: "Timestamp when order was placed"
+
+      - name: order_items
+        description: "Individual items within each order"
+        columns:
+          - name: order_id
+            description: "Reference to parent order"
+          - name: order_item_id
+            description: "Sequence number of item within order"
+          - name: product_id
+            description: "Product identifier"
+          - name: price
+            description: "Item price in BRL"
+          - name: freight_value
+            description: "Shipping cost in BRL"
+
+      - name: customers
+        description: "Customer information"
+        columns:
+          - name: customer_id
+            description: "Customer ID (per order)"
+          - name: customer_unique_id
+            description: "Unique person identifier (same across orders)"
+          - name: customer_city
+            description: "Customer city"
+          - name: customer_state
+            description: "Customer state code"
+
+      - name: products
+        description: "Product catalog"
+        columns:
+          - name: product_id
+            description: "Product identifier"
+          - name: product_category_name
+            description: "Product category in Portuguese"

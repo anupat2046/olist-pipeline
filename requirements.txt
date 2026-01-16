@@ -1,0 +1,17 @@
+# Olist Data Engineering Pipeline - Dependencies
+
+# PySpark for data transformation
+pyspark>=3.4.0
+
+# Google Cloud Platform
+google-cloud-storage>=2.10.0
+google-cloud-bigquery>=3.11.0
+
+# Configuration
+pyyaml>=6.0
+
+# Utilities
+python-dotenv>=1.0.0
+
+# dbt for data modeling
+dbt-bigquery>=1.7.0

@@ -1,0 +1,47 @@
+# GCP Service Account Keys (สำคัญมาก - ห้ามขึ้น GitHub!)
+.google/
+*.json
+
+# Data files (ไฟล์ใหญ่ ไม่ควรขึ้น GitHub)
+data/
+
+# Logs
+logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+dist/
+build/
+venv/
+.venv/
+*.egg
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Spark
+*.crc
+_SUCCESS
+spark-warehouse/
+derby.log
+metastore_db/
+
+# dbt
+dbt_olist/target/
+dbt_olist/dbt_packages/
+dbt_olist/logs/
+dbt_olist/.user.yml
+dbt_olist/package-lock.yml
+
+# Airflow (Astro CLI)
+airflow/.astro/
+airflow/logs/
+airflow/.env

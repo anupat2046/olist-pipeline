@@ -1,0 +1,84 @@
+version: 2
+
+models:
+  # ============================================
+  # Fact Table: Sales Performance
+  # ============================================
+  - name: fct_sales_performance
+    description: |
+      Grain: One row per order item (excluding canceled orders).
+      Contains revenue metrics joined with customer info.
+    
+    columns:
+      - name: order_item_key
+        description: "Surrogate key for each order item"
+        tests:
+          - unique
+          - not_null
+      
+      - name: order_id
+        description: "Order identifier"
+        tests:
+          - not_null
+      
+      - name: customer_unique_id
+        description: "Unique person identifier (use this for LTV!)"
+        tests:
+          - not_null
+      
+      - name: net_revenue
+        description: "Total revenue = price + freight"
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                error_if: ">0"
+                warn_if: ">0"
+      
+      - name: purchased_at
+        description: "Order purchase timestamp"
+        tests:
+          - not_null
+
+  # ============================================
+  # Dimension Table: Customer Metrics
+  # ============================================
+  - name: dim_customers_metrics
+    description: |
+      Customer-level aggregations including LTV, order counts, and tenure.
+      Grain: One row per customer_unique_id (actual person).
+    
+    columns:
+      - name: customer_unique_id
+        description: "Unique person identifier"
+        tests:
+          - unique
+          - not_null
+      
+      - name: lifetime_value
+        description: "Total spend by customer (LTV)"
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              config:
+                error_if: ">0"
+                warn_if: ">0"
+      
+      - name: total_orders
+        description: "Number of orders placed"
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 1"
+      
+      - name: first_order_date
+        description: "Date of first purchase"
+        tests:
+          - not_null
+      
+      - name: last_order_date
+        description: "Date of most recent purchase"
+        tests:
+          - not_null

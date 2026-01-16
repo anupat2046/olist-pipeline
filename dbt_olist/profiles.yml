@@ -1,0 +1,19 @@
+# dbt Profile Configuration for Olist Project
+# 
+# The keyfile path is relative to the dbt project directory (dbt_olist/)
+# or you can use an absolute path
+
+olist:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: "olist-de"
+      dataset: olist_gold
+      location: us-central1
+      threads: 4
+      timeout_seconds: 300
+      # Path to service account key (relative to parent directory)
+      keyfile: "../.google/service-account.json"
+

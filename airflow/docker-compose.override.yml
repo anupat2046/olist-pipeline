@@ -1,0 +1,22 @@
+services:
+  scheduler:
+    volumes:
+      - /c/Users/USER/Desktop/olist pipeline:/opt/airflow/project
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/project/.google/service-account.json
+
+  webserver:
+    volumes:
+      - /c/Users/USER/Desktop/olist pipeline:/opt/airflow/project
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/project/.google/service-account.json
+
+  triggerer:
+    volumes:
+      - /c/Users/USER/Desktop/olist pipeline:/opt/airflow/project
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/project/.google/service-account.json
+
+  postgres:
+    ports:
+      - "5433:5432"

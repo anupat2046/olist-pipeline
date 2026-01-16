@@ -1,0 +1,11 @@
+# Astro Project Ignore File
+# Ignore files/folders not needed in Airflow
+
+__pycache__
+*.pyc
+*.pyo
+.git
+.gitignore
+*.md
+tests/
+.pytest_cache/

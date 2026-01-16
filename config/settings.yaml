@@ -1,0 +1,43 @@
+# ==============================================================================
+# Olist Data Engineering Pipeline Configuration
+# ==============================================================================
+
+gcp:
+  # GCP Project ID - Replace with your project ID
+  project_id: "olist-de"
+  
+  # GCS Bucket name (must be globally unique)
+  bucket_name: "olist-datalake-anupat"
+  
+  # BigQuery Dataset name
+  dataset_name: "olist_warehouse"
+  
+  # Region - us-central1 for Always Free tier (5GB/month)
+  location: "us-central1"
+  
+  # Path to Service Account Key (relative to project root)
+  service_account_key: ".google/service-account.json"
+
+paths:
+  # Local data directories
+  raw: "data/raw"
+  silver: "data/silver"
+  logs: "logs"
+
+# Tables to process (CSV filename without extension -> output table name)
+tables:
+  - csv_name: "olist_orders_dataset"
+    table_name: "orders"
+    partition_by: ["order_purchase_year", "order_purchase_month"]
+    
+  - csv_name: "olist_order_items_dataset"
+    table_name: "order_items"
+    partition_by: ["order_purchase_year", "order_purchase_month"]
+    
+  - csv_name: "olist_customers_dataset"
+    table_name: "customers"
+    partition_by: null
+    
+  - csv_name: "olist_products_dataset"
+    table_name: "products"
+    partition_by: null
