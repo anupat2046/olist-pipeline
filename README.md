@@ -13,30 +13,31 @@ A production-ready data engineering solution demonstrating **Medallion Architect
 ## Architecture Overview
 
 ![Architecture Diagram](docs/images/messageImage_1768485288622.jpg)
-*High-level overview of the data flow and orchestration logic*
+_High-level overview of the data flow and orchestration logic_
 
 ### The Medallion Approach
 
 ![Medallion Architecture](docs/images/messageImage_1768487761339.jpg)
-*Refining raw data into business-ready analytics tables*
+_Refining raw data into business-ready analytics tables_
 
-| Stage | Technology | Description |
-|-------|------------|-------------|
-| **Ingestion** | PySpark | Reads raw CSV, applies explicit schema validation, and outputs partitioned Parquet |
-| **Storage** | GCS | Scalable cloud storage for Parquet files (Silver Layer) |
-| **Warehouse** | BigQuery | Curated Silver layer and optimized Gold layer marts |
-| **Modeling** | dbt-core | Transformation logic, data quality testing, and documentation |
-| **Orchestration** | Airflow | Automated, idempotent workflow management with Astro CLI |
+| Stage             | Technology | Description                                                                        |
+| ----------------- | ---------- | ---------------------------------------------------------------------------------- |
+| **Ingestion**     | PySpark    | Reads raw CSV, applies explicit schema validation, and outputs partitioned Parquet |
+| **Storage**       | GCS        | Scalable cloud storage for Parquet files (Silver Layer)                            |
+| **Warehouse**     | BigQuery   | Curated Silver layer and optimized Gold layer marts                                |
+| **Modeling**      | dbt-core   | Transformation logic, data quality testing, and documentation                      |
+| **Orchestration** | Airflow    | Automated, idempotent workflow management with Astro CLI                           |
 
 ---
 
-## 🔧 Engineering Highlights
+## Engineering Highlights
 
 ### 1. Data Transformation (PySpark)
 
 I implemented a robust transformation layer using PySpark to handle ingestion. By using **Explicit StructType schemas** instead of `inferSchema`, I ensured the pipeline's stability against unexpected data format changes.
 
 **Key Features:**
+
 - **Partitioned Output**: Parquet files are partitioned by year and month to optimize downstream query costs in BigQuery
 - **Snappy Compression**: Balanced storage efficiency and read performance
 - **Schema Contract**: Pipeline fails fast on schema violations, preventing corrupted data
@@ -46,7 +47,7 @@ I implemented a robust transformation layer using PySpark to handle ingestion. B
 ### 2. Analytics Modeling (dbt)
 
 ![dbt Lineage Graph](docs/images/Screenshot%202026-01-16%20181301.png)
-*Automated lineage showing dependencies from source to marts*
+_Automated lineage showing dependencies from source to marts_
 
 #### Solving "The Olist Trap"
 
@@ -54,23 +55,24 @@ I implemented a robust transformation layer using PySpark to handle ingestion. B
 
 ```sql
 -- WRONG: Groups by order, not person
-GROUP BY customer_id  -- 
+GROUP BY customer_id  --
 
 -- CORRECT: Accurate Lifetime Value calculation
-GROUP BY customer_unique_id  -- 
+GROUP BY customer_unique_id  --
 ```
 
 #### Advanced Optimization in Gold Layer
 
 ![Gold Layer Detail](docs/images/Screenshot%202026-01-16%20181328.png)
-*Evidence of Technical Optimization: Incremental Load, Clustering, and Partitioning*
+_Evidence of Technical Optimization: Incremental Load, Clustering, and Partitioning_
 
-| Model | Rows | Optimization |
-|-------|------|--------------|
+| Model                   | Rows  | Optimization                            |
+| ----------------------- | ----- | --------------------------------------- |
 | `fct_sales_performance` | 112k+ | Incremental + Clustering + Partitioning |
-| `dim_customers_metrics` | - | Customer LTV, tenure, order frequency |
+| `dim_customers_metrics` | -     | Customer LTV, tenure, order frequency   |
 
 **Optimization Techniques:**
+
 - **Incremental Strategy**: Only processes new data, significantly reducing computation costs
 - **Clustering**: Clustered by `customer_unique_id` to speed up customer-level analytical queries
 - **Partitioning**: Partitioned by `purchased_at` to prune unnecessary data scans
@@ -83,18 +85,19 @@ I developed a custom `JobLogger` class to ensure every run is audited. The metad
 
 **Example Log Entry:**
 
-| job_id | step_name | status | rows_processed | duration_sec |
-|--------|-----------|--------|----------------|--------------|
-| 20260116_0200 | silver_transformation | SUCCESS | 112,650 | 45.2 |
+| job_id        | step_name             | status  | rows_processed | duration_sec |
+| ------------- | --------------------- | ------- | -------------- | ------------ |
+| 20260116_0200 | silver_transformation | SUCCESS | 112,650        | 45.2         |
 
 ---
 
 ### 4. Orchestration (Airflow)
 
 ![Airflow DAG](docs/images/Screenshot%202026-01-16%20180253.png)
-*A successful end-to-end pipeline run on Airflow*
+_A successful end-to-end pipeline run on Airflow_
 
 The entire workflow is managed by Apache Airflow, featuring:
+
 - **Schedule**: Daily at 02:00 AM (`0 2 * * *`)
 - **Retries**: 2 attempts with 5-minute delay
 - **Idempotency**: The DAG is designed to be re-run safely without creating duplicate data
@@ -118,12 +121,12 @@ The entire workflow is managed by Apache Airflow, featuring:
 
 **Solution:** I utilized a **Serverless-first** approach on GCP:
 
-| Strategy | Implementation | Impact |
-|----------|---------------|--------|
-| Staging Models | `materialized='view'` | $0 storage |
-| Fact Tables | `incremental` + `unique_key` | ~90% scan reduction |
-| Partitioning | `order_purchase_timestamp` | Query pruning |
-| Location | `us-central1` | Always Free eligible |
+| Strategy       | Implementation               | Impact               |
+| -------------- | ---------------------------- | -------------------- |
+| Staging Models | `materialized='view'`        | $0 storage           |
+| Fact Tables    | `incremental` + `unique_key` | ~90% scan reduction  |
+| Partitioning   | `order_purchase_timestamp`   | Query pruning        |
+| Location       | `us-central1`                | Always Free eligible |
 
 **Result:** Entire pipeline operates within GCP's Always Free tier.
 
@@ -155,6 +158,7 @@ olist-pipeline/
 ## Quick Start
 
 ### Prerequisites
+
 - Python 3.10+
 - Java 17 (for PySpark)
 - Docker Desktop (for Airflow)
