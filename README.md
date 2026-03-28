@@ -6,7 +6,7 @@
 ![Airflow](https://img.shields.io/badge/Airflow-2.8-red?logo=apache-airflow)
 ![GCP](https://img.shields.io/badge/GCP-BigQuery-blue?logo=google-cloud)
 
-A production-ready data engineering solution demonstrating **Medallion Architecture** principles. Built with a modern data stack to handle complex E-commerce data transformation and analytics.
+An end-to-end data engineering pipeline designed with production best practices, demonstrating **Medallion Architecture** principles. Built with a modern data stack to handle complex E-commerce data transformation and analytics.
 
 ---
 
@@ -34,7 +34,7 @@ _Refining raw data into business-ready analytics tables_
 
 ### 1. Data Transformation (PySpark)
 
-I implemented a robust transformation layer using PySpark to handle ingestion. By using **Explicit StructType schemas** instead of `inferSchema`, I ensured the pipeline's stability against unexpected data format changes.
+The ingestion phase uses a robust PySpark transformation layer. By utilizing **Explicit StructType schemas** instead of `inferSchema`, the pipeline guarantees stability against unexpected data format changes.
 
 **Key Features:**
 
@@ -81,7 +81,7 @@ _Evidence of Technical Optimization: Incremental Load, Clustering, and Partition
 
 ### 3. Operational Excellence (Observability)
 
-I developed a custom `JobLogger` class to ensure every run is audited. The metadata is captured in the `meta.job_runs` table within BigQuery for full pipeline observability.
+The pipeline includes a `JobLogger` class to ensure every run is audited. The metadata is captured in the `meta.job_runs` table within BigQuery for full pipeline observability.
 
 **Example Log Entry:**
 
@@ -111,7 +111,7 @@ The entire workflow is managed by Apache Airflow, featuring:
 
 **Problem:** Inconsistent data types in raw CSVs often break downstream models.
 
-**Solution:** I established a "Schema Contract" in the PySpark layer. By failing fast on schema violations, I prevent corrupted data from entering the warehouse.
+**Solution:** Implemented a "Schema Contract" in the PySpark layer. By failing fast on schema violations, I prevent corrupted data from entering the warehouse.
 
 ---
 
@@ -119,7 +119,7 @@ The entire workflow is managed by Apache Airflow, featuring:
 
 **Problem:** Managing a multi-stage pipeline under budget constraints.
 
-**Solution:** I utilized a **Serverless-first** approach on GCP:
+**Solution:** Utilized a **Serverless-first** approach on GCP:
 
 | Strategy       | Implementation               | Impact               |
 | -------------- | ---------------------------- | -------------------- |
@@ -194,7 +194,7 @@ This pipeline is engineered for immediate scalability. The logical progression i
 
 ### Connecting to Looker Studio
 
-With the modeled data residing in BigQuery (Gold Marts), it is primed for native integration with Looker Studio:
+With the modeled data residing in BigQuery (Gold Marts), the architecture is ready for native integration with BI tools like Looker Studio:
 
 - **LTV Dashboard**: Leverage the `dim_customers_metrics` table to perform customer segmentation and identify high-value individuals based on their Lifetime Value
 - **Sales Performance**: Monitor monthly Net Revenue trends. By utilizing the table's Partitioning, dashboard performance remains high while BigQuery scan costs remain low
@@ -211,6 +211,7 @@ This project is more than a data transfer exercise; it provides a robust foundat
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/anupat-suttilert-888a73348)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?logo=github)](https://github.com/anupat2046)
+[![Website](https://img.shields.io/badge/Website-anupatsuttilert.com-teal?logo=google-chrome)](https://anupatsuttilert.com)
 
 - Passionate about scalable data architecture and cloud optimization
 - Stack: Python, SQL, PySpark, dbt, Airflow, GCP
